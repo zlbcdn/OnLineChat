@@ -1,0 +1,9 @@
+E:\workspace\Socket\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain.dll
+E:\workspace\Socket\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain.pdb
+E:\workspace\Socket\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.csproj.CoreCompileInputs.cache
+E:\workspace\Socket\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.dll
+E:\workspace\Socket\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.pdb
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain.pdb
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.pdb
