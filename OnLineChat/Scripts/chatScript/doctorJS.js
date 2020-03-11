@@ -1,5 +1,6 @@
 ﻿var connect_flag = false;
 var v_doctor_id, v_patient_id;
+var current_patient_id = "";
 
 
 //界面初始化
@@ -66,8 +67,9 @@ $(document).ready(function () {
 
                         //设置时间
                         var span_time_node = document.createElement('span');
+                        span_time_node.setAttribute("the_patient", revice_data_array[i].PatientID);
                         span_time_node.classList.add('time');
-                        span_time_node.innerText = "1";
+                        span_time_node.innerText = "";
 
                         //设置预览
                         var span_preview_node = document.createElement('span');
@@ -105,8 +107,16 @@ $(document).ready(function () {
             $(this).addClass("active"); //将激活样式“授予”当前的li元素
 
             //授予界面
-            var select_name = $(this).find('span:first').html();
+            var select_patient_name_span = $(this).find('span:first');
+            var select_name = select_patient_name_span.html();
             $("#current_patient").text(select_name);
+
+            current_patient_id = select_patient_name_span.attr("the_patient");
+
+            //去掉未读消息的数量及样式
+            var unread_count_span = $(this).find("span.time");
+            unread_count_span.text("");
+            unread_count_span.css("padding", "0");
 
             //去掉之前的聊天内容
             $('.container .right').find('.active-chat').removeClass('active-chat');
@@ -129,11 +139,6 @@ $(document).ready(function () {
 
 
         });
-
-
-
-
-
     });
 
     //发送的方法
@@ -149,7 +154,20 @@ $(document).ready(function () {
         }
     });
 
+    //发送图片功能
+    $("#inputImage").change(function (e) {
+        var file = this.files[0];
+        if (undefined == file) {
+            return;
+        }
+        var r = new FileReader();
+        r.readAsDataURL(file);
+        r.onload = function (e) {
+            var base64 = e.target.result;
 
+            sendMessageInfo("normal", v_doctor_id, v_patient_id, base64);
+        }
+    });
 
 });
 
@@ -202,15 +220,8 @@ function sendMessage(e) {
 
     //回车键
     if (e.keyCode == 13) {
-        var message_json = {
-            "message_type": "normal",
-            "message_from": v_doctor_id,
-            "message_to": v_patient_id,
-            "message_content": document.getElementById("send_message").value
-        };
 
-        var content_message = JSON.stringify(message_json);
-        window.ws.send(content_message);
+        sendMessageInfo("normal", v_doctor_id, v_patient_id, document.getElementById("send_message").value);
     }
 
 }
@@ -234,6 +245,8 @@ function getServiceText(data) {
     //正常数据
     if (revice_data["message_type"] == "normal")
     {
+
+       
         var receive_message_from = revice_data["message_from"];
         var message_from_self = false;//消息是否为自己发送的标志位
 
@@ -243,10 +256,29 @@ function getServiceText(data) {
             message_from_self = true;
         }
 
+
+        if (!message_from_self)
+        {
+            if (receive_message_from != current_patient_id)
+            {
+                var the_select_count_span = $("#the_people_container span.time[the_patient = '" + revice_data["message_from"] + "']");
+
+                var the_select_count = the_select_count_span.text();
+                if (isEmpty(the_select_count))
+                {
+                    the_select_count_span.css("padding", "3px 5px");
+                    the_select_count_span.text("1");
+                } else {
+                    var unread_count = parseInt(the_select_count);
+                    unread_count = unread_count + 1;
+                    the_select_count_span.text(unread_count);
+                }
+            }
+        }
+
+
         var temp_data_chat= $("#the_people_container").find("[the_patient = '" + temp_patient_id + "']").parent().attr("data-chat");
     
-    
-
         //获取数据
         var select_chat = $("div[data-chat='" + temp_data_chat + "']");
 
@@ -266,11 +298,39 @@ function getServiceText(data) {
         if (message_from_self) { message_div.addClass("bubble me"); }
         else { message_div.addClass("bubble you"); }
 
-        message_div.text(revice_data["message_content"]);
+        var revice_content = "";
+        revice_content = revice_data["message_content"];
+        if (revice_content.indexOf("base64") != -1 && revice_content.indexOf("data") != -1) {
+            var img_node = $("<img />");
+            img_node.attr("src", revice_content);
+            message_div.append(img_node);
+        } else {
+            message_div.text(revice_content);
+        }
 
         select_chat.append(message_div);
-
         select_chat.scrollTop = $(".right").scrollHeight;
     }
-    
+}
+
+
+function isEmpty(str) {
+    if (typeof str == null || str == "" || str == "undefined") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//发送消息的具体实现
+function sendMessageInfo(v_message_type_arg, v_patient_id_arg, v_doctor_id_arg, v_message_content_arg) {
+    var message_json = {
+        "message_type": v_message_type_arg,
+        "message_from": v_patient_id_arg,
+        "message_to": v_doctor_id_arg,
+        "message_content": v_message_content_arg
+    };
+
+    var content_message = JSON.stringify(message_json);
+    window.ws.send(content_message);
 }

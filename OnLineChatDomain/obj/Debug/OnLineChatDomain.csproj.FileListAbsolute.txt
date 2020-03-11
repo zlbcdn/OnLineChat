@@ -7,3 +7,4 @@ D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain.pdb
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.dll
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.pdb
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.csprojResolveAssemblyReference.cache

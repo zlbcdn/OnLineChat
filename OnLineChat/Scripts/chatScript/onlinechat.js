@@ -101,6 +101,21 @@ $(document).ready(function () {
         }
     });
 
+
+    $("#inputImage").change(function (e) {
+        var file = this.files[0];
+        if (undefined == file) {
+            return;
+        }
+        var r = new FileReader();
+        r.readAsDataURL(file);
+        r.onload = function (e) {
+            var base64 = e.target.result;
+
+            sendMessageInfo("normal", v_patient_id, v_doctor_id, base64);
+        }
+    });
+
 });//the end of init
 
 
@@ -153,18 +168,24 @@ function sendMessage(e) {
 
     //回车键
     if (e.keyCode == 13) {
-        var message_json = {
-            "message_type": "normal",
-            "message_from": v_patient_id,
-            "message_to": v_doctor_id,
-            "message_content": document.getElementById("dialogue_input").value
-        };
-
-        var content_message = JSON.stringify(message_json);
-        window.ws.send(content_message);
+        sendMessageInfo("normal", v_patient_id, v_doctor_id, document.getElementById("dialogue_input").value);
     }
 
 }
+
+//发送消息的具体实现
+function sendMessageInfo(v_message_type_arg,v_patient_id_arg,v_doctor_id_arg,v_message_content_arg) {
+    var message_json = {
+        "message_type": v_message_type_arg,
+        "message_from": v_patient_id_arg,
+        "message_to": v_doctor_id_arg,
+        "message_content": v_message_content_arg
+    };
+
+    var content_message = JSON.stringify(message_json);
+    window.ws.send(content_message);
+}
+
 
 //接收数据
 function getServiceText(data) {
@@ -184,9 +205,15 @@ function getServiceText(data) {
         nodeSpan.classList.add('dialogue-text', 'dialogue-service-text');
     }
 
-    //添加内容
-    nodeSpan.innerHTML = revice_data["message_content"];
-
+    var revice_content = "";
+    revice_content = revice_data["message_content"];
+    if (revice_content.indexOf("base64") != -1 && revice_content.indexOf("data") != -1) {
+        var nodeImg = document.createElement('img');
+        nodeImg.src = revice_content;
+        nodeSpan.appendChild(nodeImg);
+    } else {
+        nodeSpan.innerHTML = revice_content;
+    }
     //将内容添加到HTML中
     nodeP.appendChild(nodeSpan);
     dialogueContain.appendChild(nodeP);

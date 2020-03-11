@@ -160,8 +160,8 @@ body {
         background-color: var(--red);
 
         height: auto;
-        min-width: 10px;
-        padding: 3px 5px;
+        /*min-width: 10px;*/
+        /*padding: 3px 5px;*/
         font-size: 12px;
         font-weight: 700;
         line-height: 1;
