@@ -243,3 +243,7 @@ E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.csp
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.csproj.CopyComplete
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.dll
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.pdb
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\OnLineChatDomain.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\Oracle.DataAccess.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\OnLineChatDomain.pdb
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.csprojResolveAssemblyReference.cache

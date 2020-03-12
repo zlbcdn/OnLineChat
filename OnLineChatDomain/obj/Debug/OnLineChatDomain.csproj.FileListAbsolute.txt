@@ -15,3 +15,4 @@ E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineCh
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\Oracle.DataAccess.dll
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.csproj.CopyComplete
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.csprojAssemblyReference.cache
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\Oracle.DataAccess.dll
