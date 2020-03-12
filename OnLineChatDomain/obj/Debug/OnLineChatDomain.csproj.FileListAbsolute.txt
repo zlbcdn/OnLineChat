@@ -8,3 +8,10 @@ D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.dll
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.pdb
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.csprojResolveAssemblyReference.cache
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain.dll
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\OnLineChatDomain.pdb
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.dll
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.pdb
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\Debug\Oracle.DataAccess.dll
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.csproj.CopyComplete
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Debug\OnLineChatDomain.csprojAssemblyReference.cache
