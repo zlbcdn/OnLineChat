@@ -9,77 +9,75 @@ var connect_flag = false;
 
 $(document).ready(function () {
 
-    //向医生咨询按钮
-    $('#consultation_btn').button({
-        icons: {
-            primary: "ui-icon-mail-closed"
+
+
+    //根据患者就诊基本信息，获取Token（有一定有效期的Token）
+    $.ajax({
+        async: true,
+        url: "/OnLineChat/Patient/getToken",
+        type: "POST",
+        data: {
+            patient_id: "10002018",
+            visit_date: "2020/3/1",
+            visit_dept: "1A000",
+            doctor_id: "A00239"
+        },
+        success: function (rJson) {
+
+            //授予唯一Token
+            visit_token = rJson;
+
+            //患者基本信息
+            v_patient_id = $("#patient_id_text").val();
+            v_patient_name = $("#patient_name_text").val();
+            v_doctor_id = $("#doctor_id_text").val();
+            v_doctor_name = $("#doctor_name_text").val();
+            v_doctor_dept = $("#doctor_dept_text").val();
+
+            //设置头像、科室、医院等基本信息
+            var doctor_pic_text = v_doctor_name.substr(0, 1);
+            $("#doctor_pic").text(doctor_pic_text);
+            $("#doctor_dept").text(v_doctor_dept);
+            $("#hospital_name").text("北京清华长庚医院"); //需设定
+
+            //服务器连接
+            if (connect_flag == false) {
+                connectionService(v_patient_id, v_doctor_id);
+            }
+
+            //打开对话界面
+            $('.dialogue-main').css({ 'display': 'inline-block', 'height': '0' });
+            $('.dialogue-main').animate({ 'height': '600px' });
+
+            //关闭对话框
+            //$("#patient_dialog").dialog("close");
         }
-    }).click(function () {
 
-        //TO-DO：此部分需要完善，需要通过父界面传递患者基本信息。交界面
-        //弹出对话框，录入患者及医生信息
-        $("#patient_dialog").dialog({
-            height: 200,
-            width: 350,
-            modal: true,
-            buttons: [
-                {
-                    text: "确定",
-                    click: function () {
-
-                        //根据患者就诊基本信息，获取Token（有一定有效期的Token）
-                        $.ajax({
-                            async: true,
-                            url: "/OnLineChat/Patient/getToken",
-                            type: "POST",
-                            data: {
-                                patient_id: "10002018",
-                                visit_date: "2020/3/1",
-                                visit_dept: "1A000",
-                                doctor_id:"A00239"
-                            },
-                            success: function (rJson) {
-
-                                //授予唯一Token
-                                visit_token = rJson;
-
-                                //患者基本信息
-                                v_patient_id = $("#patient_id_text").val();
-                                v_patient_name = $("#patient_name_text").val();
-                                v_doctor_id = $("#doctor_id_text").val();
-                                v_doctor_name = $("#doctor_name_text").val();
-                                v_doctor_dept = $("#doctor_dept_text").val();
-
-                                //设置头像、科室、医院等基本信息
-                                var doctor_pic_text = v_doctor_name.substr(0, 1);
-                                $("#doctor_pic").text(doctor_pic_text);
-                                $("#doctor_dept").text(v_doctor_dept);
-                                $("#hospital_name").text("北京清华长庚医院"); //需设定
-
-                                //服务器连接
-                                if (connect_flag == false) {
-                                    connectionService(v_patient_id, v_doctor_id);
-                                }
-
-                                //打开对话界面
-                                $('.dialogue-main').css({ 'display': 'inline-block', 'height': '0' });
-                                $('.dialogue-main').animate({ 'height': '600px' });
-
-                                //关闭对话框
-                                $("#patient_dialog").dialog("close");
-                            }
-
-                        });
-                    }
-                }]
-        });// the end of dialog
+    });
 
 
+    //向医生咨询按钮
+//    $('#consultation_btn').button({
+//        icons: {
+//            primary: "ui-icon-mail-closed"
+//        }
+//    }).click(function () {
+//        //TO-DO：此部分需要完善，需要通过父界面传递患者基本信息。交界面
+//        //弹出对话框，录入患者及医生信息
+//        //$("#patient_dialog").dialog({
+//        //    height: 200,
+//        //    width: 350,
+//        //    modal: true,
+//        //    buttons: [
+//        //        {
+//        //            text: "确定",
+//        //            click: function () {
 
-
-
-
-        });//the end of consultation button 
+                        
+//        //            }
+//        //        }]
+//        //});// the end of dialog
+//});//the end of consultation button 
 
     //关闭对话框
     $("#btn_close").click(function (e) {

@@ -21,7 +21,9 @@ namespace OnLineChat.Controllers
             //TO-DO
             if (checkToken(token))
             {
-                patientModel = onlineChatLogic.getVisitInfoByVisitID(visit_id);
+                //patientModel = onlineChatLogic.getVisitInfoByVisitID(visit_id);
+                patientModel = new PatientVisitModel() { PatientID = "10002018", PatientName = "测试张三",
+                    DoctorID = "A00239", DoctorName = "郑林", DeptID = "12700",DeptName="测试科室"};
             }
             else
             {
