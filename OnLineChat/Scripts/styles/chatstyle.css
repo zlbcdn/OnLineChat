@@ -1,6 +1,8 @@
 ﻿@charset "utf-8";
 /*公共样式*/
-html{font-family:"Helvetica Neue",Helvetica,STHeiTi,sans-serif;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+html{font-family:"Helvetica Neue",Helvetica,STHeiTi,sans-serif;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;
+     height:auto;
+}
 body{-webkit-overflow-scrolling:touch;margin:0;}
 ul{margin:0;padding:0;list-style:none;outline:none;}
 dl,dd{margin:0;}
@@ -19,75 +21,16 @@ body {
     font-size: 14px;
     color: #fff;
 }
-/*右侧点击按钮*/
-.dialogue-wrapper .dialogue-support-btn {
-    position: fixed;
-    display: inline-block;
-    top: 50%;
-    right: 0;
-    margin-top: -70px;
 
-    padding: 10px 0;
-    width: 40px;
-    height: 120px;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-    cursor: pointer;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    box-shadow: -1px 1px 5px rgba(0, 0, 0, .4);
-    background-color: #5d94f3;
-}
-
-.dialogue-wrapper .dialogue-support-btn .dialogue-support-icon {
-    position: relative;
-    display: inline-block;
-    margin-bottom: -2px;
-    width: 20px;
-    height: 16px;
-    border-radius: 4px;
-    background-color: #fff;
-}
-
-.dialogue-wrapper .dialogue-support-btn .dialogue-support-icon:before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -6px;
-    margin-left: -3px;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 6px solid #fff;
-}
-
-.dialogue-wrapper .dialogue-support-btn .dialogue-support-line {
-    display: inline-block;
-    width: 100%;
-    height: 1px;
-    background-color: #ddd;
-}
-
-.dialogue-wrapper .dialogue-support-btn .dialogue-support-text {
-    padding: 5px 0;
-    letter-spacing: 4px;
-    writing-mode: vertical-rl;
-    -webkit-user-select: none;
-}
 
 /*底部客服对话框*/
-.dialogue-wrapper .dialogue-main {
-    position: fixed;
-    display: none;
-    right: 100px;
-    bottom: 10px;
-    width: 400px;
-    height: 600px;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .4);
-}
+    .dialogue-wrapper .dialogue-main {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+    }
 
 /*客服对话框头部*/
 .dialogue-wrapper .dialogue-main .dialogue-header {
@@ -147,26 +90,27 @@ body {
     height: 380px;
     word-wrap: break-word;
     background-color: #f9f9f9;
+    position:relative;
 }
 
 .dialogue-wrapper .dialogue-main .dialogue-text {
     display: inline-block;
     position: relative;
-    padding: 10px;
-    max-width: 120px;
+    padding: 6px;
+    max-width: 200px;
     white-space: pre-wrap;
     border: 1px solid #09d07d;
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: #09d07d;
     box-sizing: border-box;
 }
 
 
-//新增-郑林-2020-2-25
+/*图片-2020-3-13添加*/
 .dialogue-img {
     display: inline-block;
     position: relative;
-    padding: 10px;
+    padding: 3px;
     max-width: 240px;
     white-space: pre-wrap;
     border: 1px solid #09d07d;
@@ -182,6 +126,8 @@ body {
 
 .dialogue-wrapper .dialogue-main .dialogue-service-text {
     margin-left: 20px;
+    border: 1px solid #09d07d;
+    background-color: #09d07d;
 }
 
 .dialogue-wrapper .dialogue-main .dialogue-service-text:before {
@@ -225,7 +171,8 @@ body {
 .dialogue-wrapper .dialogue-main .dialogue-submit {
     position: relative;
     padding: 10px;
-    height: 100px;
+    /*height: 100px;*/
+    height:auto;
     color: #000;
     word-wrap: break-word;
     border-top: 1px solid #ddd;
@@ -274,21 +221,27 @@ body {
     overflow-y: auto;
     display: inline-block;
     padding: 5px 10px;
-    width: 295px;
+    width: 80%;
     height: 70px;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
+    vertical-align:top;
     white-space: pre-wrap;
     word-wrap: break-word;
     resize: none;
     border-right: 1px solid #ddd;
     box-sizing: border-box;
+    position:relative;
 }
 
+/*输入框旁边的工具框*/
 .dialogue-wrapper .dialogue-submit .dialogue-input-tools {
+    position:absolute;
+    right:0;
+    bottom:10px;
     display: inline-block;
-    width: 80px;
-    height: 80px;
-    vertical-align: middle;
+    width: 20%;
+    height: 70px;
+    vertical-align: top;
 }
 
 /*郑林 2020-3-3 添加*/

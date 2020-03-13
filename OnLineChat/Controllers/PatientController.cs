@@ -22,12 +22,13 @@ namespace OnLineChat.Controllers
             if (checkToken(token))
             {
                 //patientModel = onlineChatLogic.getVisitInfoByVisitID(visit_id);
-                patientModel = new PatientVisitModel() { PatientID = "10002018", PatientName = "测试张三",
+
+                patientModel = new PatientVisitModel() { MessageCode="OK", PatientID = "10002018", PatientName = "测试张三",
                     DoctorID = "A00239", DoctorName = "郑林", DeptID = "12700",DeptName="测试科室"};
             }
             else
             {
-                patientModel = new PatientVisitModel();
+                patientModel = new PatientVisitModel() { MessageCode="Error",MessageContent="弹出具体的异常原因"};
             }
 
             return View(patientModel);

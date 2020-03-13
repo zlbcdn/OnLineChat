@@ -9,10 +9,13 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+
     <title>问诊咨询</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">*@
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -28,6 +31,7 @@
     </div>
 
     <div id="patient_dialog" title="输入就诊信息" style="display:none">
+        <span id="message_code">@Model.MessageCode</span>
         <p>病历号<input type="text" id="patient_id_text" value=@Model.PatientID /></p>
         <p>患者姓名<input type="text" id="patient_name_text" value=@Model.PatientName /></p>
         <p>医生员工号<input type="text" id="doctor_id_text" value=@Model.DoctorID /></p>
@@ -48,12 +52,19 @@
                 </div>
             </div>
             <div id="dialogue_contain" class="dialogue-contain">
-                <p class="dialogue-service-contain"><span class="dialogue-text dialogue-service-text">您好，请提问</span></p>
-                <p class="dialogue-customer-contain"><span class="dialogue-text dialogue-customer-text">我有个问题</span></p>
+                @*<p class="dialogue-service-contain"><span class="dialogue-text dialogue-service-text">您好！</span></p>
+                <p class="dialogue-customer-contain"><span class="dialogue-text dialogue-customer-text">我有个问题</span></p>*@
             </div>
             <div class="dialogue-submit">
-                <p id="dialogue_hint" class="dialogue-hint"><span class="dialogue-hint-icon">!</span><span class="dialogue-hint-text">发送内容不能为空</span></p>
-                <textarea id="dialogue_input" class="dialogue-input-text" placeholder="请输入内容，按回车(Enter)键发送"></textarea>
+                <p id="dialogue_hint" class="dialogue-hint">
+                    <span class="dialogue-hint-icon">!</span>
+                    <span class="dialogue-hint-text">发送内容不能为空</span>
+                </p>
+
+                <div>
+                    <textarea id="dialogue_input" class="dialogue-input-text" placeholder="请输入内容，按回车(Enter)键发送"></textarea>
+                </div>
+
                 <div class="dialogue-input-tools">
                     <label id="chat-tuxiang" title="发送图片" for="inputImage" class="btn-default-styles">
                         <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png"

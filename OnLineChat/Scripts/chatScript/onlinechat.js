@@ -124,7 +124,7 @@ function connectionService(v_patient_id, v_doctor_id) {
     var wsImpl = window.WebSocket || window.MozWebSocket;
 
     //创建websocket
-    window.ws = new wsImpl('ws://127.0.0.1:7181/');
+    window.ws = new wsImpl('ws://10.37.24.14:7181/');
 
     //the callback of open
     ws.onopen = function () {

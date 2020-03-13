@@ -29,10 +29,10 @@ $(document).ready(function () {
             url: "/OnLineChat/Doctor/getRegisterPatientList",
             type: "POST",
             data: {
-                doctor_id: "10002018",
-                dept_id: "2020/3/1",
-                visit_date: "1A000",
-                register_type: "A00239"
+                doctor_id: $("#doctor_id_text").val(),
+                dept_id: $("#dept_id_text").val(),
+                visit_date: $("#visit_date_text").val(),
+                register_type: $("#reg_type_text").val()
             },
             success: function (rJson) {
 
@@ -178,7 +178,7 @@ function connectionService(v_doctor_id) {
     var wsImpl = window.WebSocket || window.MozWebSocket;
 
     //创建websocket
-    window.ws = new wsImpl('ws://127.0.0.1:7181/');
+    window.ws = new wsImpl('ws://10.37.24.14:7181/');
 
     //the callback of open
     ws.onopen = function () {

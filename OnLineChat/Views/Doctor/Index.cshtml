@@ -1,4 +1,5 @@
-﻿
+﻿@model OnLineChatDomain.ClinicDoctorModel
+
 @{
     Layout = null;
 }
@@ -21,8 +22,11 @@
     <span id="doctor_sign_in_btn">医生登录</span>
 
     <div id="doctor_dialog" title="输入出诊信息" style="display:none">
-        <p>医生员工号&nbsp; <input type="text" id="doctor_id_text" value="A00239" /></p>
+        <p>医生员工号&nbsp; <input type="text" id="doctor_id_text" value=@Model.DoctorID /></p>
         <p>医生姓名&nbsp; <input type="text" id="doctor_name_text" value="王仲" /></p>
+        <p>就诊科室&nbsp; <input type="text" id="dept_id_text" value=@Model.DeptID /></p>
+        <p>就诊日期&nbsp; <input type="text" id="visit_date_text" value=@Model.VisitDate /></p>
+        <p>诊别&nbsp; <input type="text" id="reg_type_text" value=@Model.RegisterType /></p>
         <hr />
         <span id="sign_in_btn">确定</span>
     </div>
