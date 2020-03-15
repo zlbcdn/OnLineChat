@@ -7,138 +7,155 @@ var current_patient_id = "";
 $(document).ready(function () {
 
     //医生登录
-    $("#doctor_sign_in_btn").button().click(function () {
-        $("#doctor_dialog").dialog({
-            height: 200,
-            width: 350,
-            modal: true
-        });
+    //$("#doctor_sign_in_btn").button().click(function () {
+    //    $("#doctor_dialog").dialog({
+    //        height: 200,
+    //        width: 350,
+    //        modal: true
+    //    });
+    //});
+
+
+
+
+    $.ajax({
+        async: true,
+        url: "/OnLineChat/Doctor/getRegisterPatientList",
+        type: "POST",
+        data: {
+            doctor_id: $("#doctor_id_text").val(),
+            dept_id: $("#dept_id_text").val(),
+            visit_date: $("#visit_date_text").val(),
+            register_type: $("#reg_type_text").val()
+        },
+        success: function (rJson) {
+
+            var revice_data_array = JSON.parse(rJson);
+            var the_people_continer = document.getElementById("the_people_container");
+
+            for (var i = 0; i < revice_data_array.length; i++) {
+                //创建存放列表
+                var liNode = document.createElement('li');
+                liNode.classList.add('person');
+                liNode.setAttribute("data-chat", revice_data_array[i].VisitID);
+
+                //设置头像
+                var img_node = document.createElement('img');
+                img_node.setAttribute("alt", "");
+                if (revice_data_array[i].Sex == "F") { img_node.src = "../Scripts/styles/icon_people/female.png"; }
+                else { img_node.src = "../Scripts/styles/icon_people/male.png"; }
+
+                //设置姓名
+                var span_name_node = document.createElement('span');
+                span_name_node.classList.add('name');
+                span_name_node.setAttribute("the_patient", revice_data_array[i].PatientID);
+                span_name_node.innerText = revice_data_array[i].PatientName;
+
+                //设置
+                var span_online_status_node = document.createElement('span');
+                span_online_status_node.setAttribute("the_patient", revice_data_array[i].PatientID);
+                span_online_status_node.classList.add('onlinestaus');
+                span_online_status_node.innerText = "";
+
+
+                //设置时间
+                var span_time_node = document.createElement('span');
+                span_time_node.setAttribute("the_patient", revice_data_array[i].PatientID);
+                span_time_node.classList.add('time');
+                span_time_node.innerText = "";
+
+                //设置预览
+                var span_preview_node = document.createElement('span');
+                span_preview_node.classList.add('preview');
+                span_preview_node.innerText = "";
+
+                //设置病历号
+                var span_patient_node = document.createElement('span');
+                span_patient_node.classList.add('hidden');
+                span_patient_node.setAttribute("the_patient", revice_data_array[i].PatientID);
+                span_patient_node.innerText = revice_data_array[i].PatientID;
+
+                liNode.appendChild(img_node);
+                liNode.appendChild(span_name_node);
+                liNode.appendChild(span_online_status_node);
+                liNode.appendChild(span_time_node);
+                liNode.appendChild(span_preview_node);
+                liNode.appendChild(span_patient_node);
+
+                the_people_continer.appendChild(liNode);
+            }
+
+            //连接
+            if (connect_flag == false) {
+                v_doctor_id = $("#doctor_id_text").val();
+                connectionService(v_doctor_id);
+            }
+
+            //$("#doctor_dialog").dialog("close");
+
+
+            
+
+
+        }
+    });
+
+    //为数据添加监听事件
+    $('#the_people_container').on('click', 'li', function (e) {
+
+        $("#the_people_container .active").removeClass("active"); //先取消当前的激活样式
+        $(this).addClass("active"); //将激活样式“授予”当前的li元素
+
+        //授予界面
+        var select_patient_name_span = $(this).find('span:first');
+        var select_name = select_patient_name_span.html();
+        $("#current_patient").text(select_name);
+
+        current_patient_id = select_patient_name_span.attr("the_patient");
+
+        //去掉未读消息的数量及样式
+        var unread_count_span = $(this).find("span.time");
+        unread_count_span.text("");
+        unread_count_span.css("padding", "0");
+
+        //去掉之前的聊天内容
+        $('.container .right').find('.active-chat').removeClass('active-chat');
+
+        var data_chat = $(this).attr('data-chat');
+        $('.container .right').find('[data-chat="' + data_chat + '"]').addClass('active-chat');
+
+        v_patient_id = $(this).find('span:last').html();
+
+        //发送消息
+        var id_json = {
+            "message_type": "init",
+            "message_from": v_doctor_id,
+            "message_to": v_patient_id,
+            "message_content": ""
+        };
+
+        var hello_message = JSON.stringify(id_json);
+        ws.send(hello_message);
+
+
     });
 
 
     //获取医生登录信息
     $("#sign_in_btn").button().click(function () {
 
-        v_doctor_id = $("#doctor_id_text").val();
+       // v_doctor_id = $("#doctor_id_text").val();
 
         //$('.wrapper').css({ 'display': 'inline-block', 'height': '0' });
         //$('.wrapper').animate({ 'height': '800px' });
 
-        $.ajax({
-            async: true,
-            url: "/OnLineChat/Doctor/getRegisterPatientList",
-            type: "POST",
-            data: {
-                doctor_id: $("#doctor_id_text").val(),
-                dept_id: $("#dept_id_text").val(),
-                visit_date: $("#visit_date_text").val(),
-                register_type: $("#reg_type_text").val()
-            },
-            success: function (rJson) {
-
-                var revice_data_array = JSON.parse(rJson);
-                var the_people_continer = document.getElementById("the_people_container");
-
-                for (var i = 0; i < revice_data_array.length; i++)
-                    {
-                        //创建存放列表
-                        var liNode = document.createElement('li');
-                        liNode.classList.add('person');
-                        liNode.setAttribute("data-chat", revice_data_array[i].VisitID);
-
-                        //设置头像
-                        var img_node = document.createElement('img');
-                        img_node.setAttribute("alt", "");
-                        if (revice_data_array[i].Sex == "F") { img_node.src= "../Scripts/styles/icon_people/female.png"; }
-                        else { img_node.src = "../Scripts/styles/icon_people/male.png"; }
-
-                        //设置姓名
-                        var span_name_node = document.createElement('span');
-                        span_name_node.classList.add('name');
-                        span_name_node.setAttribute("the_patient", revice_data_array[i].PatientID);
-                        span_name_node.innerText = revice_data_array[i].PatientName;
-
-                        //设置
-                        var span_online_status_node = document.createElement('span');
-                        span_online_status_node.setAttribute("the_patient", revice_data_array[i].PatientID);
-                        span_online_status_node.classList.add('onlinestaus');
-                        span_online_status_node.innerText = "";
-                        
-
-                        //设置时间
-                        var span_time_node = document.createElement('span');
-                        span_time_node.setAttribute("the_patient", revice_data_array[i].PatientID);
-                        span_time_node.classList.add('time');
-                        span_time_node.innerText = "";
-
-                        //设置预览
-                        var span_preview_node = document.createElement('span');
-                        span_preview_node.classList.add('preview');
-                    span_preview_node.innerText = "";
-
-                    //设置病历号
-                    var span_patient_node = document.createElement('span');
-                    span_patient_node.classList.add('hidden');
-                    span_patient_node.setAttribute("the_patient", revice_data_array[i].PatientID);
-                    span_patient_node.innerText = revice_data_array[i].PatientID;
-
-                        liNode.appendChild(img_node);
-                        liNode.appendChild(span_name_node);
-                        liNode.appendChild(span_online_status_node);
-                        liNode.appendChild(span_time_node);
-                    liNode.appendChild(span_preview_node);
-                    liNode.appendChild(span_patient_node);
-
-                        the_people_continer.appendChild(liNode);
-                    }
-
-                //连接
-                if (connect_flag == false) { connectionService(v_doctor_id);}
-
-                $("#doctor_dialog").dialog("close");
-                }
-        });
+        
 
 
-        //为数据添加监听事件
-        $('#the_people_container').on('click', 'li', function (e) {
-
-            $("#the_people_container .active").removeClass("active"); //先取消当前的激活样式
-            $(this).addClass("active"); //将激活样式“授予”当前的li元素
-
-            //授予界面
-            var select_patient_name_span = $(this).find('span:first');
-            var select_name = select_patient_name_span.html();
-            $("#current_patient").text(select_name);
-
-            current_patient_id = select_patient_name_span.attr("the_patient");
-
-            //去掉未读消息的数量及样式
-            var unread_count_span = $(this).find("span.time");
-            unread_count_span.text("");
-            unread_count_span.css("padding", "0");
-
-            //去掉之前的聊天内容
-            $('.container .right').find('.active-chat').removeClass('active-chat');
-
-            var data_chat= $(this).attr('data-chat');
-            $('.container .right').find('[data-chat="' + data_chat+'"]').addClass('active-chat');
-
-            v_patient_id = $(this).find('span:last').html();
-
-            //发送消息
-            var id_json = {
-                "message_type": "init",
-                "message_from": v_doctor_id,
-                "message_to": v_patient_id,
-                "message_content": ""
-            };
-
-            var hello_message = JSON.stringify(id_json);
-            ws.send(hello_message);
+        
 
 
-        });
+
     });
 
     //发送的方法
@@ -178,7 +195,7 @@ function connectionService(v_doctor_id) {
     var wsImpl = window.WebSocket || window.MozWebSocket;
 
     //创建websocket
-    window.ws = new wsImpl('ws://10.37.24.14:7181/');
+    window.ws = new wsImpl('ws://127.0.0.1:7181/');
 
     //the callback of open
     ws.onopen = function () {
@@ -288,7 +305,15 @@ function getServiceText(data) {
             chat_div.classList.add('chat');
             chat_div.setAttribute("data-chat", temp_data_chat);
 
-            $(".wrapper .container .right .top").after(chat_div);
+            //chat_div.css("overflow-y", "scroll");
+            //$(".wrapper .container .right .top").after(chat_div);
+            
+
+            $("#current_patient_div").append(chat_div);
+            $("#current_patient_div").css("overflow-y", "scroll");
+            $("#current_patient_div").css("height", "460px");
+
+
         }
 
         //再次确认并赋值
@@ -302,6 +327,7 @@ function getServiceText(data) {
         revice_content = revice_data["message_content"];
         if (revice_content.indexOf("base64") != -1 && revice_content.indexOf("data") != -1) {
             var img_node = $("<img />");
+            img_node.addClass("dialogue-img");
             img_node.attr("src", revice_content);
             message_div.append(img_node);
         } else {
@@ -309,7 +335,7 @@ function getServiceText(data) {
         }
 
         select_chat.append(message_div);
-        select_chat.scrollTop = $(".right").scrollHeight;
+        $("#current_patient_div").scrollTop = $("#current_patient_div").scrollHeight;
     }
 }
 

@@ -124,7 +124,10 @@ function connectionService(v_patient_id, v_doctor_id) {
     var wsImpl = window.WebSocket || window.MozWebSocket;
 
     //创建websocket
-    window.ws = new wsImpl('ws://10.37.24.14:7181/');
+    //window.ws = new wsImpl('ws://10.37.24.14:7181/');
+    window.ws = new wsImpl('ws://127.0.0.1:7181/');
+
+    
 
     //the callback of open
     ws.onopen = function () {
@@ -207,6 +210,7 @@ function getServiceText(data) {
     revice_content = revice_data["message_content"];
     if (revice_content.indexOf("base64") != -1 && revice_content.indexOf("data") != -1) {
         var nodeImg = document.createElement('img');
+        nodeImg.classList.add("dialogue-img");
         nodeImg.src = revice_content;
         nodeSpan.appendChild(nodeImg);
     } else {

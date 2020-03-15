@@ -37,6 +37,8 @@ body {
     left: 50%;
     width: var(--wrapper);
     height: 800px;
+    /*width: 100%;
+    height: 100%;*/
     -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
 }
@@ -231,16 +233,16 @@ body {
   position: relative;
   display: none;
   overflow: hidden;
-  padding: 0 35px 92px;
+  padding: 0 35px 0;
   border-width: 1px 1px 1px 0;
   border-style: solid;
   border-color: var(--light);
-  height: calc(100% - 48px);
+  /*height: calc(100% - 70px);*/
   justify-content: flex-end;
   flex-direction: column;
 }
 
-.container .right .chat {
+/*.container .right .chat {
     position: relative;
     display: none;
     overflow: hidden;
@@ -251,7 +253,7 @@ body {
     height: calc(100% - 48px);
     justify-content: flex-end;
     flex-direction: column;
-}
+}*/
 
 
 
@@ -380,31 +382,30 @@ body {
     }
     .container .right .bubble.you {
         float: left;
-        color: var(--white);
-        background-color: var(--blue);
+        color: var(--dark);
+        background-color: #eceff1;
+        
         align-self: flex-start;
         -webkit-animation-name: slideFromLeft;
         animation-name: slideFromLeft;
     }
-.container .right .bubble.you:before {
-  left: -3px;
-  background-color: var(--blue);
-}
+        .container .right .bubble.you:before {
+            left: -3px;
+            background-color: #eceff1;
+        }
+
     .container .right .bubble.me {
         float: right;
-        
-
-        color: var(--dark);
-        background-color: #eceff1;
-
+        color: var(--white);
+        background-color: var(--blue);
         align-self: flex-end;
         -webkit-animation-name: slideFromRight;
         animation-name: slideFromRight;
     }
-.container .right .bubble.me:before {
-  right: -3px;
-  background-color: #eceff1;
-}
+        .container .right .bubble.me:before {
+            right: -3px;
+            background-color: var(--blue);
+        }
 .container .right .conversation-start {
   position: relative;
   width: 100%;
@@ -424,6 +425,17 @@ body {
   height: 1px;
   content: '';
   background-color: var(--light);
+}
+.dialogue-img {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    max-width: 200px;
+    white-space: pre-wrap;
+    border: 1px solid #09d07d;
+    border-radius: 4px;
+    background-color: #09d07d;
+    box-sizing: border-box;
 }
 .container .right .conversation-start span:before {
   left: 0;

@@ -97,7 +97,7 @@ body {
     display: inline-block;
     position: relative;
     padding: 6px;
-    max-width: 200px;
+    max-width: 220px;
     white-space: pre-wrap;
     border: 1px solid #09d07d;
     border-radius: 5px;
@@ -110,8 +110,8 @@ body {
 .dialogue-img {
     display: inline-block;
     position: relative;
-    padding: 3px;
-    max-width: 240px;
+    padding: 1px;
+    max-width: 200px;
     white-space: pre-wrap;
     border: 1px solid #09d07d;
     border-radius: 4px;

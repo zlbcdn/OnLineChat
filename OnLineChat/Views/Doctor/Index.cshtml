@@ -19,7 +19,7 @@
 </head>
 <body>
 
-    <span id="doctor_sign_in_btn">医生登录</span>
+    <span id="doctor_sign_in_btn" style="display:none">医生登录</span>
 
     <div id="doctor_dialog" title="输入出诊信息" style="display:none">
         <p>医生员工号&nbsp; <input type="text" id="doctor_id_text" value=@Model.DoctorID /></p>
@@ -50,9 +50,9 @@
                     <span class="name" id="current_patient"></span>
                     <span class="hidden" id="current_patient_id_span"></span>
                 </div>
-                @*<div id="current_patient_div" class="c">
+                <div id="current_patient_div">
 
-                </div>*@
+                </div>
                 <!--内容存放地点-->
                 
                 <div class="write">
