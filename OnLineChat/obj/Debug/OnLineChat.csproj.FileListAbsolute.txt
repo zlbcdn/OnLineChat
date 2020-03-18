@@ -149,6 +149,10 @@ D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\System.Buffers.xml
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\System.Diagnostics.DiagnosticSource.xml
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\System.Memory.xml
 D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\OnLineChatDomain.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\Oracle.DataAccess.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\OnLineChatDomain.pdb
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.csprojResolveAssemblyReference.cache
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\bin\OnLineChat.dll.config
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\bin\OnLineChat.dll
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\bin\OnLineChat.pdb
@@ -243,7 +247,3 @@ E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.csp
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.csproj.CopyComplete
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.dll
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.pdb
-D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\OnLineChatDomain.dll
-D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\Oracle.DataAccess.dll
-D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\bin\OnLineChatDomain.pdb
-D:\WorkStation\OnLineChat\OnLineChat\OnLineChat\obj\Debug\OnLineChat.csprojResolveAssemblyReference.cache
