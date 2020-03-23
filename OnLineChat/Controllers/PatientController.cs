@@ -7,6 +7,8 @@ using OnLineChatDomain;
 using System.IO;
 using System.Net;
 using System.Text;
+using OnLineChatDomain;
+using Newtonsoft.Json;
 
 namespace OnLineChat.Controllers
 {
@@ -111,6 +113,16 @@ namespace OnLineChat.Controllers
         public string getToken(string patient_id,string visit_date,string visit_dept,string doctor_id)
         {
             return "12312";
+        }
+
+
+        public string getAllMessage(string from_id,string to_id)
+        {
+            OnLineChatLogic chatLogic = new OnLineChatLogic();
+
+            List<messagemodel> messageList = chatLogic.getHistoryMessage(from_id, to_id);
+
+            return JsonConvert.SerializeObject(messageList);
         }
     }
 }
