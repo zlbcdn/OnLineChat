@@ -4,3 +4,4 @@ E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\Release\Oracle
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.csproj.CopyComplete
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.dll
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.pdb
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.csprojAssemblyReference.cache

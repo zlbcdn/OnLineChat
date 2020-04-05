@@ -46,35 +46,39 @@
                 <ul class="people" id="the_people_container"></ul>
             </div>
             <div class="right">
-                <div class="top"> 
+                <div class="top">
                     <span class="name" id="current_patient"></span>
                     <span class="hidden" id="current_patient_id_span"></span>
-                    <span class="history"  id="current_patient_history">历史记录</span>
+                    <span class="history" id="current_patient_history">历史记录</span>
                 </div>
                 <div id="current_patient_div">
 
                 </div>
                 <!--内容存放地点-->
-                
+
                 <div class="write">
-                    
+
 
                     <label id="chat-tuxiang" title="发送图片" for="inputImage" class="write-link attach">
                         <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png"
                                name="file" id="inputImage" class="hidden">
                     </label>
 
-                    <input type="text"  id="send_message" />
+                    <input type="text" id="send_message" />
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="current_img_div" style="display:none">
+        <div>
+            <img src="" id="current_img" />
+        </div>
+    </div>
 
 
-
-        <script src="~/Scripts/chatScript/jquery.js"></script>
-        <script src="~/Scripts/chatScript/jquery-ui.js"></script>
-        <script src="~/Scripts/chatScript/doctorJS.js"></script>
+    <script src="~/Scripts/chatScript/jquery.js"></script>
+    <script src="~/Scripts/chatScript/jquery-ui.js"></script>
+    <script src="~/Scripts/chatScript/doctorJS.js"></script>
 </body>
 </html>

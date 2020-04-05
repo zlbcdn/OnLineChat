@@ -79,16 +79,16 @@
       <publishTime>03/12/2020 11:57:25</publishTime>
     </File>
     <File Include="bin/OnLineChat.dll">
-      <publishTime>03/18/2020 17:33:00</publishTime>
+      <publishTime>03/24/2020 17:16:34</publishTime>
     </File>
     <File Include="bin/OnLineChat.pdb">
-      <publishTime>03/18/2020 17:33:00</publishTime>
+      <publishTime>03/24/2020 17:16:34</publishTime>
     </File>
     <File Include="bin/OnLineChatDomain.dll">
-      <publishTime>03/18/2020 16:56:07</publishTime>
+      <publishTime>03/24/2020 16:43:01</publishTime>
     </File>
     <File Include="bin/OnLineChatDomain.pdb">
-      <publishTime>03/18/2020 16:56:07</publishTime>
+      <publishTime>03/24/2020 16:43:01</publishTime>
     </File>
     <File Include="bin/Oracle.DataAccess.dll">
       <publishTime>12/11/2012 10:09:39</publishTime>
@@ -256,13 +256,13 @@
       <publishTime>03/12/2020 11:57:17</publishTime>
     </File>
     <File Include="Controllers/DoctorController.cs">
-      <publishTime>03/18/2020 14:55:40</publishTime>
+      <publishTime>03/24/2020 16:46:54</publishTime>
     </File>
     <File Include="Controllers/HomeController.cs">
       <publishTime>03/12/2020 16:03:58</publishTime>
     </File>
     <File Include="Controllers/PatientController.cs">
-      <publishTime>03/18/2020 15:59:47</publishTime>
+      <publishTime>03/19/2020 23:19:55</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>03/12/2020 11:57:21</publishTime>
@@ -289,10 +289,10 @@
       <publishTime>03/12/2020 11:57:17</publishTime>
     </File>
     <File Include="OnLineChat.csproj">
-      <publishTime>03/18/2020 17:38:45</publishTime>
+      <publishTime>03/19/2020 09:53:32</publishTime>
     </File>
     <File Include="OnLineChat.csproj.user">
-      <publishTime>03/18/2020 17:16:35</publishTime>
+      <publishTime>03/24/2020 17:16:30</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>03/12/2020 11:57:22</publishTime>
@@ -316,7 +316,7 @@
       <publishTime>03/12/2020 11:57:17</publishTime>
     </File>
     <File Include="Scripts/chatScript/doctorJS.js">
-      <publishTime>03/18/2020 15:24:32</publishTime>
+      <publishTime>03/24/2020 17:15:27</publishTime>
     </File>
     <File Include="Scripts/chatScript/jquery-ui.js">
       <publishTime>03/12/2020 11:57:17</publishTime>
@@ -325,7 +325,7 @@
       <publishTime>03/12/2020 11:57:17</publishTime>
     </File>
     <File Include="Scripts/chatScript/onlinechat.js">
-      <publishTime>03/18/2020 11:38:40</publishTime>
+      <publishTime>03/24/2020 17:16:22</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.intellisense.js">
       <publishTime>03/12/2020 11:57:17</publishTime>
@@ -367,10 +367,10 @@
       <publishTime>03/12/2020 11:57:18</publishTime>
     </File>
     <File Include="Scripts/styles/chatstyle.css">
-      <publishTime>03/16/2020 08:08:04</publishTime>
+      <publishTime>03/23/2020 17:00:17</publishTime>
     </File>
     <File Include="Scripts/styles/doctorstyle.css">
-      <publishTime>03/16/2020 08:08:04</publishTime>
+      <publishTime>03/23/2020 09:16:32</publishTime>
     </File>
     <File Include="Scripts/styles/font_icon/iconfont.css">
       <publishTime>03/12/2020 11:57:18</publishTime>
@@ -430,7 +430,7 @@
       <publishTime>03/12/2020 11:57:18</publishTime>
     </File>
     <File Include="Views/Doctor/Index.cshtml">
-      <publishTime>03/18/2020 08:40:55</publishTime>
+      <publishTime>03/23/2020 09:09:22</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>03/12/2020 11:57:18</publishTime>
@@ -442,7 +442,7 @@
       <publishTime>03/12/2020 11:57:18</publishTime>
     </File>
     <File Include="Views/Patient/Index.cshtml">
-      <publishTime>03/18/2020 08:57:30</publishTime>
+      <publishTime>03/19/2020 13:01:16</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>03/12/2020 11:57:18</publishTime>
@@ -457,7 +457,7 @@
       <publishTime>03/12/2020 11:57:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/18/2020 17:14:47</publishTime>
+      <publishTime>03/24/2020 13:08:04</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>03/12/2020 11:57:18</publishTime>
