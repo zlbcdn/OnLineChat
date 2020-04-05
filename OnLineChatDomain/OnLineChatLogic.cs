@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Oracle.DataAccess.Client;
+using System.IO;
 
 namespace OnLineChatDomain
 {
@@ -71,7 +72,9 @@ namespace OnLineChatDomain
                                              where t.doctor_id = :v_doctor_id
                                                and t.dept_id = :v_dept_id
                                                and t.visit_date = :v_visit_date
-                                               and t.reg_time_name = :v_reg_time_name";
+                                               and t.reg_time_name = :v_reg_time_name
+                                                and t.VISIT_STATUS!='DEL'
+                                                order by t.SEQUENCE_NO asc ";
 
 
             try
@@ -124,6 +127,108 @@ namespace OnLineChatDomain
                 if (conn != null) conn.Close();
             }
         }
+    
+    
+        public List<messagemodel> getHistoryMessage(string message_from_id,string message_to_id)
+        {
+            List<messagemodel> resultList = new List<messagemodel>();
+            OracleConnection conn = DBContext.GetDIMSOracleConnection();
+            OracleCommand command = new OracleCommand();
+            
+            try
+            {
+                command.Connection = conn;
+
+                resultList.AddRange(getHistoryMessage(message_from_id, message_to_id, command));
+                resultList.AddRange(getHistoryMessage(message_to_id, message_from_id, command));
+
+                var tempList = (from r in resultList orderby r.message_date ascending select r).ToList<messagemodel>();
+
+                conn.Close();
+
+                return tempList;
+            }
+            catch (Exception)
+            {
+
+                return resultList;
+            }
+            finally
+            {
+                if (conn != null) conn.Close();
+            }
+
+        }
+    
+        private List<messagemodel> getHistoryMessage(string message_from_id, string message_to_id,OracleCommand command)
+        {
+            List<messagemodel> resultList = new List<messagemodel>();
+            string sqlStr = @" select t.message_from_id,
+                                               t.message_to_id,
+                                               t.message_type,
+                                               t.message_content,
+                                                t.message_time
+                                          from message_content t
+                                         where t.message_from_id = :v_message_from_id
+                                           and t.message_to_id=:v_message_to_id
+                                         order by t.message_time asc ";
+            try
+            {
+                command.CommandText = sqlStr;
+                command.Parameters.Clear();
+                command.Parameters.Add("v_message_from_id", OracleDbType.Varchar2).Value = message_from_id;
+                command.Parameters.Add("v_message_to_id", OracleDbType.Varchar2).Value = message_to_id;
+
+                using (OracleDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        messagemodel model = null;
+                        while (reader.Read())
+                        {
+                            model = new messagemodel();
+
+                            model.message_type = "normal";
+                            model.message_from = DBContext.getOracleStringItem(reader, "message_from_id");
+                            model.message_to = DBContext.getOracleStringItem(reader, "message_to_id");
+                            model.message_date = DBContext.getOracleDateTimeItem(reader, "message_time");
+                            int message_type = DBContext.getOracleInt32Item(reader, "message_type");
+                            if (message_type == 1) //代表文件
+                            {
+                                //根据路径读取文件内容
+                                string path = DBContext.getOracleStringItem(reader, "message_content");
+                                model.message_content = getContent(path);
+                            }
+                            else
+                            {
+                                model.message_content = DBContext.getOracleStringItem(reader, "message_content");
+                            }
+
+                            resultList.Add(model);
+                        }
+                    }
+                }
+
+
+                return resultList;
+            }
+            catch (Exception)
+            {
+
+                return resultList;
+            }
+        }
+
+
+        //读取文件内容
+        private string getContent(string file_path)
+        {
+            StreamReader sr = new StreamReader(file_path, Encoding.Default);
+            String line = sr.ReadToEnd();
+            sr.Dispose();
+            sr.Close();
+            return line;
+        }
     }
 
     public class PatientVisitModel
@@ -153,5 +258,14 @@ namespace OnLineChatDomain
         public string DeptID { get; set; }
         public string VisitDate { get; set; }
         public string RegisterType { get; set; }
+    }
+
+    public class messagemodel
+    {
+        public string message_type { get; set; }
+        public string message_from { get; set; }
+        public string message_to { get; set; }
+        public string message_content { get; set; }
+        public DateTime message_date { get; set; }
     }
 }

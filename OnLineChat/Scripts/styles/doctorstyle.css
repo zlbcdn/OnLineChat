@@ -152,6 +152,9 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
 }
+
+
+
     .container .left .people .person .time {
         font-size: 14px;
         position: absolute;
@@ -219,6 +222,16 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
 }
+
+.history {
+        font-size: 14px;
+        line-height: 22px;
+        color: var(--dark);
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 600;
+        position: absolute;
+        right: 20px;
+    }
 
 .onlinestaus {
         color: var(--blue);

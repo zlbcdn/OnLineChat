@@ -11,21 +11,12 @@ $(document).ready(function () {
 
 
 
-    //根据患者就诊基本信息，获取Token（有一定有效期的Token）
-    $.ajax({
-        async: true,
-        url: "/OnLineChat/Patient/getToken",
-        type: "POST",
-        data: {
-            patient_id: "10002018",
-            visit_date: "2020/3/1",
-            visit_dept: "1A000",
-            doctor_id: "A00239"
-        },
-        success: function (rJson) {
 
-            //授予唯一Token
-            visit_token = rJson;
+        
+
+
+
+
 
             //患者基本信息
             v_patient_id = $("#patient_id_text").val();
@@ -41,7 +32,7 @@ $(document).ready(function () {
             $("#hospital_name").text("北京清华长庚医院"); //需设定
 
             //服务器连接
-            if (connect_flag == false) {
+            if (connect_flag === false) {
                 connectionService(v_patient_id, v_doctor_id);
             }
 
@@ -49,11 +40,13 @@ $(document).ready(function () {
             $('.dialogue-main').css({ 'display': 'inline-block', 'height': '0' });
             $('.dialogue-main').animate({ 'height': '600px' });
 
-            //关闭对话框
-            //$("#patient_dialog").dialog("close");
-        }
 
-    });
+            //加载历史对话消息
+        //getHistoryMessage();
+    getHistoryMessage(v_patient_id, v_doctor_id);
+
+    //根据患者就诊基本信息，获取Token（有一定有效期的Token）
+
 
 
     //向医生咨询按钮
@@ -80,11 +73,11 @@ $(document).ready(function () {
 //});//the end of consultation button 
 
     //关闭对话框
-    $("#btn_close").click(function (e) {
-        $('.dialogue-main').animate({ 'height': '0' }, function () {
-            $('.dialogue-main').css({ 'display': 'none' });
-        });
-    });
+    //$("#btn_close").click(function (e) {
+    //    $('.dialogue-main').animate({ 'height': '0' }, function () {
+    //        $('.dialogue-main').css({ 'display': 'none' });
+    //    });
+    //});
 
     //发送的方法
     $("#dialogue_input").keydown(function (e) {
@@ -93,8 +86,8 @@ $(document).ready(function () {
 
     //清空发送框
     $("#dialogue_input").keyup(function (e) {
-        var e = e || window.event;
-        if (e.keyCode == 13) {
+        var e1 = e || window.event;
+        if (e1.keyCode === 13) {
             document.getElementById("dialogue_input").value = "";
         }
     });
@@ -102,7 +95,7 @@ $(document).ready(function () {
 
     $("#inputImage").change(function (e) {
         var file = this.files[0];
-        if (undefined == file) {
+        if (undefined === file) {
             return;
         }
         var r = new FileReader();
@@ -111,8 +104,33 @@ $(document).ready(function () {
             var base64 = e.target.result;
 
             sendMessageInfo("normal", v_patient_id, v_doctor_id, base64);
-        }
+        };
     });
+
+
+    //监听方法
+    //  $('#the_people_container').on('click', 'li', function (e) {
+    $("#dialogue_contain").on("click", 'img', function (e) {
+        //打开一个Diag，将img数据填充
+        var content_src= $(this).attr("src");
+
+        $("#current_img").attr("src", content_src);
+        $("#current_img").addClass("display-current-img");
+
+        // max-width: 200px;
+
+        var client_width = document.body.clientWidth;
+        $("#current_img").css("max-width",client_width+"px");
+
+        $("#current_img_div").dialog({
+            height: 300,
+            width: 400,
+            modal: true
+        }).dialog("open");// the end of dialog
+
+    });
+
+
 
 });//the end of init
 
@@ -124,8 +142,8 @@ function connectionService(v_patient_id, v_doctor_id) {
     var wsImpl = window.WebSocket || window.MozWebSocket;
 
     //创建websocket
-    //window.ws = new wsImpl('ws://10.37.24.14:7181/');
-    window.ws = new wsImpl('ws://127.0.0.1:7181/');
+    window.ws = new wsImpl('ws://10.37.24.14:7181/');
+    //window.ws = new wsImpl('ws://127.0.0.1:7181/');
 
     
 
@@ -165,10 +183,10 @@ function connectionService(v_patient_id, v_doctor_id) {
 
 //发送数据
 function sendMessage(e) {
-    var e = e || window.event;
+    var e1 = e || window.event;
 
     //回车键
-    if (e.keyCode == 13) {
+    if (e1.keyCode === 13) {
         sendMessageInfo("normal", v_patient_id, v_doctor_id, document.getElementById("dialogue_input").value);
     }
 
@@ -198,7 +216,7 @@ function getServiceText(data) {
         nodeSpan = document.createElement('span'),
         dialogueContain = document.getElementById('dialogue_contain');
 
-    if (revice_data["message_from"] == v_patient_id) {
+    if (revice_data["message_from"] === v_patient_id) {
         nodeP.classList.add('dialogue-customer-contain');
         nodeSpan.classList.add('dialogue-text', 'dialogue-customer-text');
     } else {	
@@ -208,7 +226,7 @@ function getServiceText(data) {
 
     var revice_content = "";
     revice_content = revice_data["message_content"];
-    if (revice_content.indexOf("base64") != -1 && revice_content.indexOf("data") != -1) {
+    if (revice_content.indexOf("base64") !== -1 && revice_content.indexOf("data") !== -1) {
         var nodeImg = document.createElement('img');
         nodeImg.classList.add("dialogue-img");
         nodeImg.src = revice_content;
@@ -223,3 +241,63 @@ function getServiceText(data) {
     //设定滚动条
     dialogueContain.scrollTop = dialogueContain.scrollHeight;
 }
+
+function getHistoryMessage(message_from_id,message_to_id) {
+    //根据患者就诊基本信息，获取Token（有一定有效期的Token）
+    $.ajax({
+        async: true,
+        url: "/OnLineChat/Patient/getAllMessage",
+        type: "POST",
+        data: {
+            from_id: message_from_id,
+            to_id: message_to_id
+        },
+        success: function (rJson) {
+
+            var revice_data = JSON.parse(rJson);
+
+            for (var i = 0; i < revice_data.length; i++)
+            {
+                addHistory(message_from_id, revice_data[i]);
+            }
+
+            var dialogueContain = document.getElementById('dialogue_contain');
+            dialogueContain.scrollTop = dialogueContain.scrollHeight;
+        }
+
+    });
+
+}
+
+
+function addHistory(message_from_id, message_array) {
+    //通过追加P和Span实现
+    var nodeP = document.createElement('p'),
+        nodeSpan = document.createElement('span'),
+        dialogueContain = document.getElementById('dialogue_contain');
+
+    if (message_array["message_from"] === message_from_id) {
+        nodeP.classList.add('dialogue-customer-contain');
+        nodeSpan.classList.add('dialogue-text', 'dialogue-customer-text');
+    } else {
+        nodeP.classList.add('dialogue-service-contain');
+        nodeSpan.classList.add('dialogue-text', 'dialogue-service-text');
+    }
+
+    var revice_content = "";
+    revice_content = message_array["message_content"];
+    if (revice_content.indexOf("base64") !== -1 && revice_content.indexOf("data") !== -1) {
+        var nodeImg = document.createElement('img');
+        nodeImg.classList.add("dialogue-img");
+        nodeImg.src = revice_content;
+        nodeSpan.appendChild(nodeImg);
+    } else {
+        nodeSpan.innerHTML = revice_content;
+    }
+    //将内容添加到HTML中
+    nodeP.appendChild(nodeSpan);
+    dialogueContain.appendChild(nodeP);    
+}
+
+
+

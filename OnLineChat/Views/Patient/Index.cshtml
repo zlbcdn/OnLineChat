@@ -32,6 +32,7 @@
 
     <div id="patient_dialog" title="输入就诊信息" style="display:none">
         <span id="message_code">@Model.MessageCode</span>
+        <span id="message_content">@Model.MessageContent</span>
         <p>病历号<input type="text" id="patient_id_text" value=@Model.PatientID /></p>
         <p>患者姓名<input type="text" id="patient_name_text" value=@Model.PatientName /></p>
         <p>医生员工号<input type="text" id="doctor_id_text" value=@Model.DoctorID /></p>
@@ -78,6 +79,11 @@
 
     </div>
 
+    <div id="current_img_div" style="display:none">
+        <div>
+            <img src="" id="current_img" />
+        </div>
+    </div>
 
 
     <!--添加js文件 onchange="selectImg(this)" -->

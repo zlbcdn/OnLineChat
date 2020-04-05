@@ -93,17 +93,17 @@ body {
     position:relative;
 }
 
-.dialogue-wrapper .dialogue-main .dialogue-text {
-    display: inline-block;
-    position: relative;
-    padding: 6px;
-    max-width: 220px;
-    white-space: pre-wrap;
-    border: 1px solid #09d07d;
-    border-radius: 5px;
-    background-color: #09d07d;
-    box-sizing: border-box;
-}
+        .dialogue-wrapper .dialogue-main .dialogue-text {
+            display: inline-block;
+            position: relative;
+            padding: 6px;
+            max-width: 220px;
+            white-space: pre-wrap;
+            border: 1px solid #5d94f3;
+            border-radius: 5px;
+            background-color: #5d94f3;
+            box-sizing: border-box;
+        }
 
 
 /*图片-2020-3-13添加*/
@@ -113,11 +113,19 @@ body {
     padding: 1px;
     max-width: 200px;
     white-space: pre-wrap;
-    border: 1px solid #09d07d;
+    border: 1px solid #5d94f3;
     border-radius: 4px;
-    background-color: #09d07d;
+    background-color: #5d94f3;
     box-sizing: border-box;
 }
+
+
+.display-current-img {
+    max-height: 100%;
+    max-width: 120px;
+    vertical-align: middle;
+}
+
 
 .dialogue-wrapper .dialogue-main .dialogue-service-contain {
     margin-bottom: 10px;
@@ -126,23 +134,23 @@ body {
 
 .dialogue-wrapper .dialogue-main .dialogue-service-text {
     margin-left: 20px;
-    border: 1px solid #09d07d;
-    background-color: #09d07d;
+    border: 1px solid #5d94f3;
+    background-color: #5d94f3;
 }
 
-.dialogue-wrapper .dialogue-main .dialogue-service-text:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -10px;
-    width: 0;
-    height: 0;
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-right: 10px solid #09d07d;
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-}
+    .dialogue-wrapper .dialogue-main .dialogue-service-text:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 10px solid #5d94f3;
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
 
 .dialogue-wrapper .dialogue-main .dialogue-customer-contain {
     margin-bottom: 10px;
@@ -153,19 +161,19 @@ body {
     margin-right: 20px;
 }
 
-.dialogue-wrapper .dialogue-main .dialogue-customer-text:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -10px;
-    width: 0;
-    height: 0;
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-left: 10px solid #09d07d;
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-}
+    .dialogue-wrapper .dialogue-main .dialogue-customer-text:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 10px solid #5d94f3;
+        -webkit-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
 
 /*客服对话框底部与输入*/
 .dialogue-wrapper .dialogue-main .dialogue-submit {

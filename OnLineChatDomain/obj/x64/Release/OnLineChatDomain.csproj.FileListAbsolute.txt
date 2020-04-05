@@ -1,0 +1,7 @@
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\x64\Release\OnLineChatDomain.dll
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\x64\Release\OnLineChatDomain.pdb
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\bin\x64\Release\oracle.dataaccess.dll
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\x64\Release\OnLineChatDomain.csprojAssemblyReference.cache
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\x64\Release\OnLineChatDomain.csproj.CopyComplete
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\x64\Release\OnLineChatDomain.dll
+E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\x64\Release\OnLineChatDomain.pdb

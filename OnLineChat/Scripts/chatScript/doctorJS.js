@@ -15,7 +15,7 @@ $(document).ready(function () {
     //    });
     //});
 
-
+    v_doctor_id = $("#doctor_id_text").val();
 
 
     $.ajax({
@@ -42,7 +42,7 @@ $(document).ready(function () {
                 //设置头像
                 var img_node = document.createElement('img');
                 img_node.setAttribute("alt", "");
-                if (revice_data_array[i].Sex == "F") { img_node.src = "../Scripts/styles/icon_people/female.png"; }
+                if (revice_data_array[i].Sex === "F") { img_node.src = "../Scripts/styles/icon_people/female.png"; }
                 else { img_node.src = "../Scripts/styles/icon_people/male.png"; }
 
                 //设置姓名
@@ -86,17 +86,42 @@ $(document).ready(function () {
             }
 
             //连接
-            if (connect_flag == false) {
-                v_doctor_id = $("#doctor_id_text").val();
+            if (connect_flag === false) {
                 connectionService(v_doctor_id);
             }
 
-            //$("#doctor_dialog").dialog("close");
+            //查看历史聊天信息
+            $("#current_patient_history").click(function (e) {
 
+                var check_flag = true;
 
-            
+                //if (v_patient_id === null || v_patient_id === "" || v_patient_id === undefined) { alert("请先选择患者！"); }
+                check_flag = check_flag && checkArgIsNull(v_patient_id);
 
+                //判断是否有误
+                if (check_flag) {
+                    $.ajax({
+                        async: true,
+                        url: "/OnLineChat/Patient/getAllMessage",
+                        type: "POST",
+                        data: {
+                            from_id: v_doctor_id,
+                            to_id: v_patient_id
+                        },
+                        success: function (rJson) {
 
+                            var revice_data = JSON.parse(rJson);
+
+                            for (var i = 0; i < revice_data.length; i++) {
+                                addDoctorHistory(v_doctor_id, revice_data[i]);
+                            }
+
+                            $("#current_patient_div").scrollTop($("#current_patient_div").prop('scrollHeight'));
+                        }
+
+                    });//the end of ajax 
+                }
+            });//the end of click function
         }
     });
 
@@ -141,6 +166,9 @@ $(document).ready(function () {
     });
 
 
+
+
+
     //获取医生登录信息
     $("#sign_in_btn").button().click(function () {
 
@@ -165,8 +193,8 @@ $(document).ready(function () {
 
     //清空发送框
     $("#send_message").keyup(function (e) {
-        var e = e || window.event;
-        if (e.keyCode == 13) {
+        var e1 = e || window.event;
+        if (e1.keyCode === 13) {
             document.getElementById("send_message").value = "";
         }
     });
@@ -174,7 +202,7 @@ $(document).ready(function () {
     //发送图片功能
     $("#inputImage").change(function (e) {
         var file = this.files[0];
-        if (undefined == file) {
+        if (undefined === file) {
             return;
         }
         var r = new FileReader();
@@ -183,7 +211,7 @@ $(document).ready(function () {
             var base64 = e.target.result;
 
             sendMessageInfo("normal", v_doctor_id, v_patient_id, base64);
-        }
+        };
     });
 
 });
@@ -195,7 +223,7 @@ function connectionService(v_doctor_id) {
     var wsImpl = window.WebSocket || window.MozWebSocket;
 
     //创建websocket
-    window.ws = new wsImpl('ws://127.0.0.1:7181/');
+    window.ws = new wsImpl('ws://10.37.24.14:7181/');
 
     //the callback of open
     ws.onopen = function () {
@@ -233,10 +261,10 @@ function connectionService(v_doctor_id) {
 
 //发送数据
 function sendMessage(e) {
-    var e = e || window.event;
+    var e1 = e || window.event;
 
     //回车键
-    if (e.keyCode == 13) {
+    if (e1.keyCode === 13) {
 
         sendMessageInfo("normal", v_doctor_id, v_patient_id, document.getElementById("send_message").value);
     }
@@ -249,18 +277,18 @@ function getServiceText(data) {
     var revice_data = JSON.parse(data);
 
     //初始化
-    if (revice_data["message_type"] == "init")
+    if (revice_data["message_type"] === "init")
     {
         $("#the_people_container span.onlinestaus[the_patient = '" + revice_data["message_from"] + "']").text("在线");
     }
 
     //关闭
-    if (revice_data["message_type"] == "close") {
+    if (revice_data["message_type"] === "close") {
         $("#the_people_container span.onlinestaus[the_patient = '" + revice_data["message_from"] + "']").text("");
     }
 
     //正常数据
-    if (revice_data["message_type"] == "normal")
+    if (revice_data["message_type"] === "normal")
     {
 
        
@@ -268,7 +296,7 @@ function getServiceText(data) {
         var message_from_self = false;//消息是否为自己发送的标志位
 
         var temp_patient_id = receive_message_from;
-        if (receive_message_from == v_doctor_id) {
+        if (receive_message_from === v_doctor_id) {
             temp_patient_id = revice_data["message_to"];
             message_from_self = true;
         }
@@ -276,7 +304,7 @@ function getServiceText(data) {
 
         if (!message_from_self)
         {
-            if (receive_message_from != current_patient_id)
+            if (receive_message_from !== current_patient_id)
             {
                 var the_select_count_span = $("#the_people_container span.time[the_patient = '" + revice_data["message_from"] + "']");
 
@@ -325,7 +353,7 @@ function getServiceText(data) {
 
         var revice_content = "";
         revice_content = revice_data["message_content"];
-        if (revice_content.indexOf("base64") != -1 && revice_content.indexOf("data") != -1) {
+        if (revice_content.indexOf("base64") !== -1 && revice_content.indexOf("data") !== -1) {
             var img_node = $("<img />");
             img_node.addClass("dialogue-img");
             img_node.attr("src", revice_content);
@@ -335,13 +363,15 @@ function getServiceText(data) {
         }
 
         select_chat.append(message_div);
-        $("#current_patient_div").scrollTop = $("#current_patient_div").scrollHeight;
+        //$("#current_patient_div").scrollTop = $("#current_patient_div").scrollHeight;
+        //select_chat.scrollTop = select_chat.scrollHeight;
+        $("#current_patient_div").scrollTop($("#current_patient_div").prop('scrollHeight'));
     }
 }
 
 
 function isEmpty(str) {
-    if (typeof str == null || str == "" || str == "undefined") {
+    if ( str === null || str === "" || str === "undefined") {
         return true;
     } else {
         return false;
@@ -359,4 +389,72 @@ function sendMessageInfo(v_message_type_arg, v_patient_id_arg, v_doctor_id_arg, 
 
     var content_message = JSON.stringify(message_json);
     window.ws.send(content_message);
+}
+
+//获取
+function addDoctorHistory(message_from_id, revice_data) {
+
+    //正常数据
+    if (revice_data["message_type"] === "normal") {
+
+
+        var receive_message_from = revice_data["message_from"];
+        var message_from_self = false;//消息是否为自己发送的标志位
+
+        var temp_patient_id = receive_message_from;
+        if (receive_message_from === message_from_id) {
+            temp_patient_id = revice_data["message_to"];
+            message_from_self = true;
+        }
+
+
+        var temp_data_chat = $("#the_people_container").find("[the_patient = '" + temp_patient_id + "']").parent().attr("data-chat");
+
+        //获取数据
+        var select_chat = $("div[data-chat='" + temp_data_chat + "']");
+
+
+        if (!(select_chat.length && select_chat.length > 0)) {
+            var chat_div = document.createElement("div");
+            chat_div.classList.add('chat');
+            chat_div.setAttribute("data-chat", temp_data_chat);
+
+            $("#current_patient_div").append(chat_div);
+            $("#current_patient_div").css("overflow-y", "scroll");
+            $("#current_patient_div").css("height", "460px");
+        }
+
+        //再次确认并赋值
+        select_chat = $("div[data-chat='" + temp_data_chat + "']");
+
+        var message_div = $("<div></div>");
+        if (message_from_self) { message_div.addClass("bubble me"); }
+        else { message_div.addClass("bubble you"); }
+
+        var revice_content = "";
+        revice_content = revice_data["message_content"];
+        if (revice_content.indexOf("base64") !== -1 && revice_content.indexOf("data") !== -1) {
+            var img_node = $("<img />");
+            img_node.addClass("dialogue-img");
+            img_node.attr("src", revice_content);
+            message_div.append(img_node);
+        } else {
+            message_div.text(revice_content);
+        }
+
+        select_chat.append(message_div);
+
+        
+    }
+}
+
+function checkArgIsNull(input_content) {
+    var check_flag = true;
+
+    if (v_patient_id === null || v_patient_id === "" || v_patient_id === undefined) {
+        check_flag = false;
+        alert("请先选择病人！");
+    }
+
+    return check_flag;
 }
