@@ -8,16 +8,6 @@ var visit_token;
 var connect_flag = false;
 
 $(document).ready(function () {
-
-
-
-
-        
-
-
-
-
-
             //患者基本信息
             v_patient_id = $("#patient_id_text").val();
             v_patient_name = $("#patient_name_text").val();
@@ -32,9 +22,10 @@ $(document).ready(function () {
             $("#hospital_name").text("北京清华长庚医院"); //需设定
 
             //服务器连接
-            if (connect_flag === false) {
-                connectionService(v_patient_id, v_doctor_id);
-            }
+    if (connect_flag === false) {
+        if ("WebSocket" in window) { connectionService(v_patient_id, v_doctor_id); }
+        else { alert("您好！浏览器不支持！请更换其他浏览器（例如：谷歌、搜狗等）"); }
+    }
 
             //打开对话界面
             $('.dialogue-main').css({ 'display': 'inline-block', 'height': '0' });
@@ -45,39 +36,6 @@ $(document).ready(function () {
         //getHistoryMessage();
     getHistoryMessage(v_patient_id, v_doctor_id);
 
-    //根据患者就诊基本信息，获取Token（有一定有效期的Token）
-
-
-
-    //向医生咨询按钮
-//    $('#consultation_btn').button({
-//        icons: {
-//            primary: "ui-icon-mail-closed"
-//        }
-//    }).click(function () {
-//        //TO-DO：此部分需要完善，需要通过父界面传递患者基本信息。交界面
-//        //弹出对话框，录入患者及医生信息
-//        //$("#patient_dialog").dialog({
-//        //    height: 200,
-//        //    width: 350,
-//        //    modal: true,
-//        //    buttons: [
-//        //        {
-//        //            text: "确定",
-//        //            click: function () {
-
-                        
-//        //            }
-//        //        }]
-//        //});// the end of dialog
-//});//the end of consultation button 
-
-    //关闭对话框
-    //$("#btn_close").click(function (e) {
-    //    $('.dialogue-main').animate({ 'height': '0' }, function () {
-    //        $('.dialogue-main').css({ 'display': 'none' });
-    //    });
-    //});
 
     //发送的方法
     $("#dialogue_input").keydown(function (e) {
@@ -108,8 +66,7 @@ $(document).ready(function () {
     });
 
 
-    //监听方法
-    //  $('#the_people_container').on('click', 'li', function (e) {
+    //查看图片的具体内容
     $("#dialogue_contain").on("click", 'img', function (e) {
         //打开一个Diag，将img数据填充
         var content_src= $(this).attr("src");
@@ -127,7 +84,6 @@ $(document).ready(function () {
             width: 400,
             modal: true
         }).dialog("open");// the end of dialog
-
     });
 
 
