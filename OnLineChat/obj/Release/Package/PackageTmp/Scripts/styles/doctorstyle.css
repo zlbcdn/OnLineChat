@@ -223,6 +223,14 @@ body {
   font-weight: 600;
 }
 
+
+.display-current-img {
+    max-height: 100%;
+    max-width: 450px;
+    vertical-align: middle;
+}
+
+
 .history {
         font-size: 14px;
         line-height: 22px;

@@ -5,3 +5,9 @@ E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLine
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.dll
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.pdb
 E:\PDWorkspace\TsinghuaOnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.csprojAssemblyReference.cache
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Release\OnLineChatDomain.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Release\OnLineChatDomain.pdb
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\bin\Release\oracle.dataaccess.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.csprojResolveAssemblyReference.cache
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.dll
+D:\WorkStation\OnLineChat\OnLineChat\OnLineChatDomain\obj\Release\OnLineChatDomain.pdb

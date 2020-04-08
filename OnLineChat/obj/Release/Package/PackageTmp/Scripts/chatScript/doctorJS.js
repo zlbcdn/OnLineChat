@@ -6,15 +6,6 @@ var current_patient_id = "";
 //界面初始化
 $(document).ready(function () {
 
-    //医生登录
-    //$("#doctor_sign_in_btn").button().click(function () {
-    //    $("#doctor_dialog").dialog({
-    //        height: 200,
-    //        width: 350,
-    //        modal: true
-    //    });
-    //});
-
     v_doctor_id = $("#doctor_id_text").val();
 
 
@@ -87,7 +78,12 @@ $(document).ready(function () {
 
             //连接
             if (connect_flag === false) {
-                connectionService(v_doctor_id);
+                if ("WebSocket" in window) {
+                    connectionService(v_doctor_id);
+                } else {
+                    alert("您的浏览器不支持！请复制网址，并启用其他浏览器（例如：谷歌、搜狗等浏览器）");
+                }
+                
             }
 
             //查看历史聊天信息
@@ -213,6 +209,26 @@ $(document).ready(function () {
         };
     });
 
+    //查看图片内容
+    $("#current_patient_div").on("click", 'img', function (e) {
+        //打开一个Diag，将img数据填充
+        var content_src = $(this).attr("src");
+
+        $("#current_img").attr("src", content_src);
+        $("#current_img").addClass("display-current-img");
+
+        // max-width: 200px;
+
+        var client_width = document.body.clientWidth;
+        $("#current_img").css("max-width", client_width + "px");
+
+        $("#current_img_div").dialog({
+            height: 400,
+            width: 600,
+            modal: true
+        }).dialog("open");// the end of dialog
+    });
+
 });
 
 //连接的方法
@@ -222,7 +238,7 @@ function connectionService(v_doctor_id) {
     var wsImpl = window.WebSocket || window.MozWebSocket;
 
     //创建websocket
-    window.ws = new wsImpl('ws://124.207.182.24:7181/');
+    window.ws = new wsImpl('ws://10.37.24.14:7181/');
 
     //the callback of open
     ws.onopen = function () {

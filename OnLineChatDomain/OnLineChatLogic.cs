@@ -268,4 +268,10 @@ namespace OnLineChatDomain
         public string message_content { get; set; }
         public DateTime message_date { get; set; }
     }
+
+     //界面传值
+     public class LoginSessionModel
+    {
+        public string LoginID { get; set; }
+    }
 }
